@@ -4,7 +4,6 @@ use tracing_core::Field;
 
 use opentelemetry::{
     metrics::{Counter, Histogram, Meter, MeterProvider, UpDownCounter},
-    sdk::metrics::controllers::BasicController,
     Context as OtelContext,
 };
 use tracing_subscriber::{layer::Context, registry::LookupSpan, Layer};
@@ -343,9 +342,13 @@ pub struct MetricsLayer {
 
 impl MetricsLayer {
     /// Create a new instance of MetricsLayer.
-    pub fn new(controller: BasicController) -> Self {
-        let meter =
-            controller.versioned_meter(INSTRUMENTATION_LIBRARY_NAME, Some(CARGO_PKG_VERSION), None);
+    pub fn new(controller: opentelemetry::sdk::metrics::MeterProvider) -> Self {
+        let meter = controller.versioned_meter(
+            INSTRUMENTATION_LIBRARY_NAME,
+            Some(CARGO_PKG_VERSION),
+            None::<&str>,
+            None,
+        );
         MetricsLayer {
             meter,
             instruments: Default::default(),

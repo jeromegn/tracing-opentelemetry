@@ -115,9 +115,9 @@
     deny(rustdoc::broken_intra_doc_links),
 )]
 
-/// Implementation of the trace::Subscriber trait; publishes OpenTelemetry metrics.
-#[cfg(feature = "metrics")]
-mod metrics;
+// /// Implementation of the trace::Subscriber trait; publishes OpenTelemetry metrics.
+// #[cfg(feature = "metrics")]
+// mod metrics;
 
 /// Implementation of the trace::Layer as a source of OpenTelemetry data.
 mod layer;
@@ -128,8 +128,8 @@ mod tracer;
 
 pub use layer::{layer, OpenTelemetryLayer};
 
-#[cfg(feature = "metrics")]
-pub use metrics::MetricsLayer;
+// #[cfg(feature = "metrics")]
+// pub use metrics::MetricsLayer;
 pub use span_ext::OpenTelemetrySpanExt;
 pub use tracer::PreSampledTracer;
 

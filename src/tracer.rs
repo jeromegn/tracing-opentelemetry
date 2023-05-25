@@ -88,7 +88,6 @@ impl PreSampledTracer for Tracer {
                 builder.span_kind.as_ref().unwrap_or(&SpanKind::Internal),
                 builder.attributes.as_ref().unwrap_or(&OrderMap::default()),
                 builder.links.as_deref().unwrap_or(&[]),
-                self.instrumentation_library(),
             ));
 
             process_sampling_result(
